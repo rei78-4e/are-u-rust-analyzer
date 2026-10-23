@@ -1,3 +1,32 @@
+@font-face {
+  font-family: 'Monaspace Radon';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/monaspace-radon@5.3.0/latin-400-normal.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Monaspace Radon';
+  font-display: swap;
+  font-style: italic;
+  font-weight: 400;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/monaspace-radon@5.3.0/latin-400-italic.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Monaspace Radon';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 700;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/monaspace-radon@5.3.0/latin-700-normal.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Monaspace Radon';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 800;
+  src: url(https://cdn.jsdelivr.net/fontsource/fonts/monaspace-radon@5.3.0/latin-800-normal.woff2) format('woff2');
+}
+
 :root {
   --bg: #1b1b1f;
   --panel: #232328;
@@ -12,7 +41,7 @@
   --warn: #e5c07b;
   --help: #56b6c2;
   --gutter: #61afef;
-  --mono: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --mono: "Monaspace Radon", "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --sans: system-ui, -apple-system, "Hiragino Sans", "Noto Sans JP", sans-serif;
 
   /* syntax */
