@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # scripts/verify.mjs は `rustc +<toolchain>` を実行するので rustup が必要
+      - name: Install rustc 1.99.1
+        run: |
+          rustup toolchain install 1.99.1 --profile minimal
+          rustc +1.99.1 --version
+
+      - run: npm ci
+
+      - name: Renderer round-trip tests
+        run: npm test
+
+      - name: Verify all questions with rustc
+        run: npm run verify
+
+      # 問題や解説を変えたのに verified.json を更新し忘れていないか確認
+      - name: Check questions/verified.json is up to date
+        run: git diff --exit-code -- questions/verified.json
+
+      - name: Build public/questions.json
+        run: npm run build

@@ -4,252 +4,1402 @@
     "advanced/001-underscore-no-move": {
       "hash": "1492fbe491338ddb",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/002-two-phase-borrow": {
       "hash": "7663757434bf77ee",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/003-push-pop": {
       "hash": "3eef0559fd510692",
       "compiles": false,
-      "error": "error[E0499]: cannot borrow `v` as mutable more than once at a time"
+      "status": 1,
+      "error": "error[E0499]: cannot borrow `v` as mutable more than once at a time",
+      "output": "error[E0499]: cannot borrow `v` as mutable more than once at a time\n --> main.rs:3:12\n  |\n3 |     v.push(v.pop().unwrap());\n  |     - ---- ^ second mutable borrow occurs here\n  |     | |\n  |     | first borrow later used by call\n  |     first mutable borrow occurs here\n  |\nhelp: try adding a local storing this argument...\n --> main.rs:3:12\n  |\n3 |     v.push(v.pop().unwrap());\n  |            ^^^^^^^\nhelp: ...and then using that local as the argument to this call\n --> main.rs:3:5\n  |\n3 |     v.push(v.pop().unwrap());\n  |     ^^^^^^^^^^^^^^^^^^^^^^^^\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0499`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/004-implicit-reborrow": {
       "hash": "d48b1e2b4f356a39",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/005-generic-no-reborrow": {
       "hash": "f68f7b094e9a6f3f",
       "compiles": false,
-      "error": "error[E0382]: use of moved value: `r`"
+      "status": 1,
+      "error": "error[E0382]: use of moved value: `r`",
+      "output": "error[E0382]: use of moved value: `r`\n --> main.rs:7:10\n  |\n5 |     let r = &mut n;\n  |         - move occurs because `r` has type `&mut i32`, which does not implement the `Copy` trait\n6 |     take(r);\n  |          - value moved here\n7 |     take(r);\n  |          ^ value used here after move\n  |\nhelp: consider creating a fresh reborrow of `r` here\n  |\n6 |     take(&mut *r);\n  |          ++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0382`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/006-static-promotion": {
       "hash": "8025670c822b50f5",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/007-destructuring-assign": {
       "hash": "e75c1280e6f2df29",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "warning: value assigned to `a` is never read\n --> main.rs:3:6\n  |\n3 |     (a, b) = (b, a);\n  |      ^ this value is reassigned later and never used\n4 |     [a, .., b] = [10, 20, 30];\n  |      - `a` is overwritten here before the previous value is read\n  |\n  = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default\n\nwarning: value assigned to `b` is never read\n --> main.rs:3:9\n  |\n3 |     (a, b) = (b, a);\n  |         ^ this value is reassigned later and never used\n4 |     [a, .., b] = [10, 20, 30];\n  |             - `b` is overwritten here before the previous value is read\n\nwarning: 2 warnings emitted\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/008-array-len-infer": {
       "hash": "489aca803644b7a9",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/009-ambiguous-float": {
       "hash": "d4d8bbfdf4c741bc",
       "compiles": false,
-      "error": "error[E0689]: can't call method `powi` on ambiguous numeric type `{float}`"
+      "status": 1,
+      "error": "error[E0689]: can't call method `powi` on ambiguous numeric type `{float}`",
+      "output": "error[E0689]: can't call method `powi` on ambiguous numeric type `{float}`\n --> main.rs:3:22\n  |\n3 |     println!(\"{}\", x.powi(2));\n  |                      ^^^^\n  |\nhelp: you must specify a type for this binding, like `f32`\n  |\n2 |     let x: f32 = 2.0;\n  |          +++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0689`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/010-range-inclusive-len": {
       "hash": "b04f729c89081d81",
       "compiles": false,
-      "error": "error[E0277]: the trait bound `std::ops::RangeInclusive<i32>: ExactSizeIterator` is not satisfied"
+      "status": 1,
+      "error": "error[E0277]: the trait bound `std::ops::RangeInclusive<i32>: ExactSizeIterator` is not satisfied",
+      "output": "error[E0277]: the trait bound `std::ops::RangeInclusive<i32>: ExactSizeIterator` is not satisfied\n --> main.rs:2:21\n  |\n2 |     println!(\"{}\", (1..=5).len());\n  |                     ^^^^^  --- required by a bound introduced by this call\n  |                     |\n  |                     the trait `ExactSizeIterator` is not implemented for `std::ops::RangeInclusive<i32>`\n  |\n  = help: the following other types implement trait `ExactSizeIterator`:\n            std::ops::RangeInclusive<NonZero<u16>>\n            std::ops::RangeInclusive<NonZero<u8>>\n            std::ops::RangeInclusive<NonZero<usize>>\n            std::ops::RangeInclusive<i16>\n            std::ops::RangeInclusive<i8>\n            std::ops::RangeInclusive<u16>\n            std::ops::RangeInclusive<u8>\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/011-u32-as-char": {
       "hash": "44ca9793b83e7345",
       "compiles": false,
-      "error": "error[E0604]: only `u8` can be cast as `char`, not `u32`"
+      "status": 1,
+      "error": "error[E0604]: only `u8` can be cast as `char`, not `u32`",
+      "output": "error[E0604]: only `u8` can be cast as `char`, not `u32`\n --> main.rs:2:13\n  |\n2 |     let c = 97u32 as char;\n  |             ^^^^^^^^^^^^^ invalid cast\n  |\nhelp: consider using `char::from_u32` instead\n  |\n2 -     let c = 97u32 as char;\n2 +     let c = char::from_u32(97u32);\n  |\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0604`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/012-char-range": {
       "hash": "55a2b06dc78b1ffb",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/013-infallible-pattern": {
       "hash": "6c35a816f2be9fc2",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/014-ferris-ident": {
       "hash": "ec9f5be55b77899f",
       "compiles": false,
-      "error": "error: Ferris cannot be used as an identifier"
+      "status": 1,
+      "error": "error: Ferris cannot be used as an identifier",
+      "output": "error: Ferris cannot be used as an identifier\n --> main.rs:3:9\n  |\n3 |     let 🦀 = 錆;\n  |         ^^ help: try using their name instead: `ferris`\n4 |     println!(\"{}\", 🦀);\n  |                    ^^\n\nerror: aborting due to 1 previous error\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/015-let-chains-2024": {
       "hash": "45a4f9c6590a6bc9",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/016-let-chains-2021": {
       "hash": "ac0ba45f781bec06",
       "compiles": false,
-      "error": "error: let chains are only allowed in Rust 2024 or later"
+      "status": 1,
+      "error": "error: let chains are only allowed in Rust 2024 or later",
+      "output": "error: let chains are only allowed in Rust 2024 or later\n --> main.rs:4:8\n  |\n4 |     if let Some(x) = a\n  |        ^^^^^^^^^^^^^^^\n\nerror: let chains are only allowed in Rust 2024 or later\n --> main.rs:6:12\n  |\n6 |         && let Ok(y) = b\n  |            ^^^^^^^^^^^^^\n\nerror: aborting due to 2 previous errors\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2021",
+        "main.rs"
+      ]
     },
     "advanced/017-gen-keyword": {
       "hash": "bda86dcc3b80a6cd",
       "compiles": false,
-      "error": "error: expected identifier, found reserved keyword `gen`"
+      "status": 1,
+      "error": "error: expected identifier, found reserved keyword `gen`",
+      "output": "error: expected identifier, found reserved keyword `gen`\n --> main.rs:2:9\n  |\n2 |     let gen = 42;\n  |         ^^^ expected identifier, found reserved keyword\n  |\nhelp: escape `gen` to use it as an identifier\n  |\n2 |     let r#gen = 42;\n  |         ++\n\nerror[E0425]: cannot find value `r#gen` in this scope\n --> main.rs:3:16\n  |\n3 |     println!(\"{gen}\");\n  |                ^^^ not found in this scope\n\nerror: aborting due to 2 previous errors\n\nFor more information about this error, try `rustc --explain E0425`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/018-set-var-unsafe": {
       "hash": "4a6ab194d5688cfa",
       "compiles": false,
-      "error": "error[E0133]: call to unsafe function `set_var` is unsafe and requires unsafe block"
+      "status": 1,
+      "error": "error[E0133]: call to unsafe function `set_var` is unsafe and requires unsafe block",
+      "output": "error[E0133]: call to unsafe function `set_var` is unsafe and requires unsafe block\n --> main.rs:2:5\n  |\n2 |     std::env::set_var(\"RUST_LOG\", \"debug\");\n  |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to unsafe function\n  |\n  = note: consult the function's documentation for information on how to avoid undefined behavior\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0133`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/019-ref-in-default-binding": {
       "hash": "4417c17be7d96b89",
       "compiles": false,
-      "error": "error: cannot explicitly borrow within an implicitly-borrowing pattern"
+      "status": 1,
+      "error": "error: cannot explicitly borrow within an implicitly-borrowing pattern",
+      "output": "error: cannot explicitly borrow within an implicitly-borrowing pattern\n --> main.rs:4:14\n  |\n4 |         Some(ref s) => println!(\"{s}\"),\n  |              ^^^ explicit `ref` binding modifier not allowed when implicitly borrowing\n  |\n  = note: for more information, see <https://doc.rust-lang.org/reference/patterns.html#binding-modes>\nnote: matching on a reference type with a non-reference pattern implicitly borrows the contents\n --> main.rs:4:9\n  |\n4 |         Some(ref s) => println!(\"{s}\"),\n  |         ^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`\nhelp: remove the unnecessary binding modifier\n  |\n4 -         Some(ref s) => println!(\"{s}\"),\n4 +         Some(s) => println!(\"{s}\"),\n  |\n\nerror: aborting due to 1 previous error\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/020-labeled-block": {
       "hash": "c7ee2deb62ab8aef",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/021-return-return": {
       "hash": "24a16f2e322b2be8",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "warning: unreachable expression\n --> main.rs:2:12\n  |\n2 |     return return return;\n  |            ^^^^^^^------\n  |            |      |\n  |            |      any code following this expression is unreachable\n  |            unreachable expression\n  |\n  = note: `#[warn(unreachable_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: 1 warning emitted\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/022-struct-literal-in-if": {
       "hash": "ce1df4b3360a8e05",
       "compiles": false,
-      "error": "error: struct literals are not allowed here"
+      "status": 1,
+      "error": "error: struct literals are not allowed here",
+      "output": "error: struct literals are not allowed here\n --> main.rs:8:13\n  |\n8 |     if p == P { x: 1 } {\n  |             ^^^^^^^^^^\n  |\nhelp: surround the struct literal with parentheses\n  |\n8 |     if p == (P { x: 1 }) {\n  |             +          +\n\nerror: aborting due to 1 previous error\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/023-format-field-access": {
       "hash": "45077122c5a48b83",
       "compiles": false,
-      "error": "error: invalid format string: field access isn't supported"
+      "status": 1,
+      "error": "error: invalid format string: field access isn't supported",
+      "output": "error: invalid format string: field access isn't supported\n --> main.rs:7:20\n  |\n7 |     println!(\"x = {p.x}\");\n  |                    ^^^ not supported in format string\n  |\n  = note: consider moving this expression to a local variable and then using the local here instead\nhelp: consider using a positional formatting argument instead\n  |\n7 -     println!(\"x = {p.x}\");\n7 +     println!(\"x = {0}\", p.x);\n  |\n\nerror: aborting due to 1 previous error\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/024-macro-order": {
       "hash": "e986819934b91094",
       "compiles": false,
-      "error": "error: cannot find macro `greet` in this scope"
+      "status": 1,
+      "error": "error: cannot find macro `greet` in this scope",
+      "output": "error: cannot find macro `greet` in this scope\n --> main.rs:2:5\n  |\n2 |     greet!();\n  |     ^^^^^\n  |\n  = help: have you added the `#[macro_use]` on the module/import?\n\nwarning: unused macro definition: `greet`\n --> main.rs:4:18\n  |\n4 |     macro_rules! greet {\n  |                  ^^^^^\n  |\n  = note: `#[warn(unused_macros)]` (part of `#[warn(unused)]`) on by default\n\nerror: aborting due to 1 previous error; 1 warning emitted\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/025-macro-hygiene": {
       "hash": "dc4183037c61c770",
       "compiles": false,
-      "error": "error[E0425]: cannot find value `x` in this scope"
+      "status": 1,
+      "error": "error[E0425]: cannot find value `x` in this scope",
+      "output": "error[E0425]: cannot find value `x` in this scope\n --> main.rs:9:16\n  |\n9 |     println!(\"{x}\");\n  |                ^ not found in this scope\n  |\nhelp: an identifier with the same name is defined here, but is not accessible due to macro hygiene\n --> main.rs:3:13\n  |\n3 |         let x = 42;\n  |             ^\n...\n8 |     make_x!();\n  |     --------- in this macro invocation\n  = note: this error originates in the macro `make_x` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0425`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/026-inline-const-repeat": {
       "hash": "d250ba6eb87d8c75",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/027-unconditional-panic": {
       "hash": "11fe93d645173920",
       "compiles": false,
-      "error": "error[unconditional_panic]: this operation will panic at runtime"
+      "status": 1,
+      "error": "error: this operation will panic at runtime",
+      "output": "error: this operation will panic at runtime\n --> main.rs:4:20\n  |\n4 |     println!(\"{}\", a[i]);\n  |                    ^^^^ index out of bounds: the length is 3 but the index is 5\n  |\n  = note: `#[deny(unconditional_panic)]` on by default\n\nerror: aborting due to 1 previous error\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/028-index-split-borrow": {
       "hash": "bbd16c831f66b7d9",
       "compiles": false,
-      "error": "error[E0499]: cannot borrow `v` as mutable more than once at a time"
+      "status": 1,
+      "error": "error[E0499]: cannot borrow `v` as mutable more than once at a time",
+      "output": "error[E0499]: cannot borrow `v` as mutable more than once at a time\n --> main.rs:4:18\n  |\n3 |     let a = &mut v[0];\n  |                  - first mutable borrow occurs here\n4 |     let b = &mut v[1];\n  |                  ^ second mutable borrow occurs here\n5 |     std::mem::swap(a, b);\n  |                    - first borrow later used here\n  |\n  = help: use `.split_at_mut(position)` to obtain two mutable non-overlapping sub-slices\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0499`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/029-disjoint-capture": {
       "hash": "10e89d1a5d0d7fd7",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/030-closure-ref-return": {
       "hash": "633a29439693fa6e",
       "compiles": false,
-      "error": "error: lifetime may not live long enough"
+      "status": 1,
+      "error": "error: lifetime may not live long enough",
+      "output": "error: lifetime may not live long enough\n --> main.rs:2:40\n  |\n2 |     let identity = |x: &i32| -> &i32 { x };\n  |                        -        -      ^ returning this value requires that `'1` must outlive `'2`\n  |                        |        |\n  |                        |        let's call the lifetime of this reference `'2`\n  |                        let's call the lifetime of this reference `'1`\n\nerror: aborting due to 1 previous error\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/031-blanket-local-type": {
       "hash": "5f4a4eee8217a470",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/032-trivial-where": {
       "hash": "c57939d1fef906b3",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/033-thread-scope": {
       "hash": "ee3f99005fc9e4ea",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/034-irrefutable-let-else": {
       "hash": "7725cc02a80e2cb7",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "warning: unreachable `else` clause\n --> main.rs:2:15\n  |\n2 |     let x = 5 else {\n  |     --------- ^^^^\n  |     |\n  |     assigning to binding pattern will always succeed\n  |\n  = note: this pattern always matches, so the else clause is unreachable\n  = note: `#[warn(irrefutable_let_patterns)]` on by default\n\nwarning: 1 warning emitted\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "advanced/035-async-closure": {
       "hash": "d813da9514bd2e11",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/036-move-out-of-index": {
+      "hash": "3c1e1e5a92db5bfb",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0507]: cannot move out of index of `Vec<String>`",
+      "output": "error[E0507]: cannot move out of index of `Vec<String>`\n --> main.rs:3:13\n  |\n3 |     let s = v[0];\n  |             ^^^^ move occurs because value has type `String`, which does not implement the `Copy` trait\n  |\nhelp: consider borrowing here\n  |\n3 |     let s = &v[0];\n  |             +\nhelp: consider cloning the value if the performance cost is acceptable\n  |\n3 |     let s = v[0].clone();\n  |                 ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0507`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/037-fnmut-binding": {
+      "hash": "7299a60475ae677b",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0596]: cannot borrow `inc` as mutable, as it is not declared as mutable",
+      "output": "error[E0596]: cannot borrow `inc` as mutable, as it is not declared as mutable\n --> main.rs:3:9\n  |\n3 |     let inc = || count += 1;\n  |         ^^^      ----- calling `inc` requires mutable binding due to mutable borrow of `count`\n  |         |\n  |         not mutable\n4 |     inc();\n  |     --- cannot borrow as mutable\n5 |     inc();\n  |     --- cannot borrow as mutable\n  |\nhelp: consider changing this to be mutable\n  |\n3 |     let mut inc = || count += 1;\n  |         +++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0596`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/038-move-copy-closure": {
+      "hash": "8780e5446addefcb",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/039-match-string-literal": {
+      "hash": "6ed54bcd1a74ec71",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0308]: mismatched types",
+      "output": "error[E0308]: mismatched types\n --> main.rs:4:9\n  |\n3 |     let b = match s {\n  |                   - this expression has type `String`\n4 |         \"yes\" => true,\n  |         ^^^^^ expected `String`, found `&str`\n  |\nhelp: consider converting the `String` to a `&str` using `.as_str()`\n  |\n3 |     let b = match s.as_str() {\n  |                    +++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/040-impl-trait-two-types": {
+      "hash": "4a5d2a26965f4fe0",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0308]: `if` and `else` have incompatible types",
+      "output": "error[E0308]: `if` and `else` have incompatible types\n --> main.rs:4:23\n  |\n4 |     if b { 1 } else { \"one\" }\n  |            -          ^^^^^ expected integer, found `&str`\n  |            |\n  |            expected because of this\n  |\nhelp: you could change the return type to be a boxed trait object\n  |\n3 - fn pick(b: bool) -> impl Display {\n3 + fn pick(b: bool) -> Box<dyn Display> {\n  |\nhelp: if you change the return type to expect trait objects, box the returned expressions\n  |\n4 |     if b { Box::new(1) } else { Box::new(\"one\") }\n  |            +++++++++ +          +++++++++     +\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/041-box-dyn-branches": {
+      "hash": "82c4cf13329266b4",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/042-dyn-generic-method": {
+      "hash": "56f9ef1b8d2b0137",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0038]: the trait `Greet` is not dyn compatible",
+      "output": "error[E0038]: the trait `Greet` is not dyn compatible\n  --> main.rs:16:20\n   |\n16 |     let g: Box<dyn Greet> = Box::new(En);\n   |                    ^^^^^ `Greet` is not dyn compatible\n   |\nnote: for a trait to be dyn compatible it needs to allow building a vtable\n      for more information, visit <https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility>\n  --> main.rs:4:8\n   |\n 3 | trait Greet {\n   |       ----- this trait is not dyn compatible...\n 4 |     fn greet<T: Display>(&self, name: T);\n   |        ^^^^^ ...because method `greet` has generic type parameters\n   = help: consider moving `greet` to another trait\n   = help: only type `En` implements `Greet`; consider using it directly instead.\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0038`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/043-implicit-sized": {
+      "hash": "e4713974992fbd69",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0277]: the size for values of type `dyn std::fmt::Display` cannot be known at compilation time",
+      "output": "error[E0277]: the size for values of type `dyn std::fmt::Display` cannot be known at compilation time\n --> main.rs:9:10\n  |\n9 |     show(d);\n  |     ---- ^ doesn't have a size known at compile-time\n  |     |\n  |     required by a bound introduced by this call\n  |\n  = help: the trait `Sized` is not implemented for `dyn std::fmt::Display`\nnote: required by an implicit `Sized` bound in `show`\n --> main.rs:3:9\n  |\n3 | fn show<T: Display>(t: &T) {\n  |         ^ required by the implicit `Sized` requirement on this type parameter in `show`\nhelp: consider relaxing the implicit `Sized` restriction\n  |\n3 | fn show<T: Display + ?Sized>(t: &T) {\n  |                    ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/044-question-option-in-result": {
+      "hash": "fd9be80df1fe96e7",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0277]: the `?` operator can only be used on `Result`s, not `Option`s, in a function that returns `Result`",
+      "output": "error[E0277]: the `?` operator can only be used on `Result`s, not `Option`s, in a function that returns `Result`\n --> main.rs:2:29\n  |\n1 | fn first_char(s: &str) -> Result<char, String> {\n  | ---------------------------------------------- this function returns a `Result`\n2 |     let c = s.chars().next()?;\n  |                             ^ use `.ok_or(...)?` to provide an error compatible with `Result<char, String>`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/045-question-box-error": {
+      "hash": "2842831c3efffeee",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/046-orphan-rule": {
+      "hash": "398c225c9be6608b",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0117]: only traits defined in the current crate can be implemented for types defined outside of the crate",
+      "output": "error[E0117]: only traits defined in the current crate can be implemented for types defined outside of the crate\n --> main.rs:3:1\n  |\n3 | impl fmt::Display for Vec<i32> {\n  | ^^^^^^^^^^^^^^^^^^^^^^--------\n  |                       |\n  |                       `Vec` is not defined in the current crate\n  |\n  = note: impl doesn't have any local type before any uncovered type parameters\n  = note: for more information see https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules\n  = note: define and implement a trait or new type instead\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0117`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/047-lazy-map": {
+      "hash": "c983f536b747d16d",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "warning: unused `Map` that must be used\n --> main.rs:3:5\n  |\n3 |     v.iter().map(|x| x * 2);\n  |     ^^^^^^^^^^^^^^^^^^^^^^^\n  |\n  = note: iterators are lazy and do nothing unless consumed\n  = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default\nhelp: use `let _ = ...` to ignore the resulting value\n  |\n3 |     let _ = v.iter().map(|x| x * 2);\n  |     +++++++\n\nwarning: 1 warning emitted\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/048-sum-annotation": {
+      "hash": "274cf3505a2d3f71",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0283]: type annotations needed",
+      "output": "error[E0283]: type annotations needed\n --> main.rs:3:9\n  |\n3 |     let total = v.iter().sum();\n  |         ^^^^^            --- type must be known at this point\n  |\n  = note: the type must implement `Sum<&i32>`\n  = help: the following types implement trait `Sum<A>`:\n            `Duration` implements `Sum<&'a Duration>`\n            `Duration` implements `Sum`\n            `Option<T>` implements `Sum<Option<U>>`\n            `Result<T, E>` implements `Sum<Result<U, E>>`\n            `Saturating<u128>` implements `Sum<&'a Saturating<u128>>`\n            `Saturating<u128>` implements `Sum`\n            `Saturating<u16>` implements `Sum<&'a Saturating<u16>>`\n            `Saturating<u16>` implements `Sum`\n          and 88 others\nnote: required by a bound in `std::iter::Iterator::sum`\n --> /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/iter/traits/iterator.rs:3665:4\nhelp: consider giving `total` an explicit type\n  |\n3 |     let total: /* Type */ = v.iter().sum();\n  |              ++++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0283`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/049-collect-string": {
+      "hash": "acd1e1921f0c515b",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/050-hashmap-get-insert": {
+      "hash": "4ec3f61efa0f6971",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0502]: cannot borrow `m` as mutable because it is also borrowed as immutable",
+      "output": "error[E0502]: cannot borrow `m` as mutable because it is also borrowed as immutable\n --> main.rs:7:5\n  |\n6 |     let a = m.get(\"a\");\n  |             - immutable borrow occurs here\n7 |     m.insert(\"b\", 2);\n  |     ^^^^^^^^^^^^^^^^ mutable borrow occurs here\n8 |     println!(\"{a:?}\");\n  |                - immutable borrow later used here\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0502`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/051-overflow-lint": {
+      "hash": "7b5828b392d7fd71",
+      "compiles": false,
+      "status": 1,
+      "error": "error: this arithmetic operation will overflow",
+      "output": "error: this arithmetic operation will overflow\n --> main.rs:3:13\n  |\n3 |     let y = x + 1;\n  |             ^^^^^ attempt to compute `u8::MAX + 1_u8`, which would overflow\n  |\n  = note: `#[deny(arithmetic_overflow)]` on by default\n\nerror: aborting due to 1 previous error\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/052-static-mut-ref": {
+      "hash": "b0c696fd75f350be",
+      "compiles": false,
+      "status": 1,
+      "error": "error: creating a shared reference to mutable static",
+      "output": "error: creating a shared reference to mutable static\n --> main.rs:6:24\n  |\n6 |         println!(\"{}\", COUNTER);\n  |                        ^^^^^^^ shared reference to mutable static\n  |\n  = note: shared references to mutable statics are dangerous; it's undefined behavior if the static is mutated or if a mutable reference is created for it while the shared reference lives\n  = help: use a type that relies on \"interior mutability\" instead; to read more on this, visit <https://doc.rust-lang.org/reference/interior-mutability.html>\n  = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/static-mut-references.html>\n  = note: `#[deny(static_mut_refs)]` (part of `#[deny(rust_2024_compatibility)]`) on by default\n\nerror: aborting due to 1 previous error\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/053-unsafe-extern": {
+      "hash": "89f62ca8e3169217",
+      "compiles": false,
+      "status": 1,
+      "error": "error: extern blocks must be unsafe",
+      "output": "error: extern blocks must be unsafe\n --> main.rs:1:1\n  |\n1 | / extern \"C\" {\n2 | |     fn abs(x: i32) -> i32;\n3 | | }\n  | | ^ help: needs `unsafe` before the extern keyword: `unsafe`\n  | |_|\n  |\n\nerror: aborting due to 1 previous error\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/054-unsafe-attr": {
+      "hash": "1b3e9310d9354e6c",
+      "compiles": false,
+      "status": 1,
+      "error": "error: unsafe attribute used without unsafe",
+      "output": "error: unsafe attribute used without unsafe\n --> main.rs:1:3\n  |\n1 | #[no_mangle]\n  |   ^^^^^^^^^ usage of unsafe attribute\n  |\nhelp: wrap the attribute in `unsafe(...)`\n  |\n1 | #[unsafe(no_mangle)]\n  |   +++++++         +\n\nerror: aborting due to 1 previous error\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/055-impl-trait-capture": {
+      "hash": "1a8678d2bd758329",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0506]: cannot assign to `n` because it is borrowed",
+      "output": "error[E0506]: cannot assign to `n` because it is borrowed\n  --> main.rs:9:5\n   |\n 8 |     let f = make_counter(&n);\n   |                          -- `n` is borrowed here\n 9 |     n = 2;\n   |     ^^^^^ `n` is assigned to here but it was already borrowed\n10 |     println!(\"{} {}\", f(), n);\n   |                       - borrow later used here\n   |\nnote: this call may capture more lifetimes than intended, because Rust 2024 has adjusted the `impl Trait` lifetime capture rules\n  --> main.rs:8:13\n   |\n 8 |     let f = make_counter(&n);\n   |             ^^^^^^^^^^^^^^^^\nhelp: use the precise capturing `use<...>` syntax to make the captures explicit\n   |\n 1 | fn make_counter(x: &i32) -> impl Fn() -> i32 + use<> {\n   |                                              +++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0506`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/056-tail-temp-2024": {
+      "hash": "1f65382a3a3bb8ef",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/057-tail-temp-2021": {
+      "hash": "1c3c48d137377692",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0597]: `c` does not live long enough",
+      "output": "error[E0597]: `c` does not live long enough\n --> main.rs:5:5\n  |\n4 |     let c = RefCell::new(String::from(\"rust\"));\n  |         - binding `c` declared here\n5 |     c.borrow().len()\n  |     ^---------\n  |     |\n  |     borrowed value does not live long enough\n  |     a temporary with access to the borrow is created here ...\n6 | }\n  | -\n  | |\n  | `c` dropped here while still borrowed\n  | ... and the borrow might be used here, when that temporary is dropped and runs the destructor for type `Ref<'_, String>`\n  |\n  = note: the temporary is part of an expression at the end of a block;\n          consider forcing this temporary to be dropped sooner, before the block's local variables are dropped\nhelp: for example, you could save the expression's value in a new local variable `x` and then make `x` be the expression at the end of the block\n  |\n5 |     let x = c.borrow().len(); x\n  |     +++++++                 +++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0597`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2021",
+        "main.rs"
+      ]
+    },
+    "advanced/058-const-non-const-fn": {
+      "hash": "06c95a62ee33162e",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0015]: cannot call non-const function `three` in constants",
+      "output": "error[E0015]: cannot call non-const function `three` in constants\n --> main.rs:5:18\n  |\n5 | const N: usize = three();\n  |                  ^^^^^^^\n  |\nnote: function `three` is not const\n --> main.rs:1:1\n  |\n1 | fn three() -> usize {\n  | ^^^^^^^^^^^^^^^^^^^\n  = note: calls in constants are limited to constant functions, tuple structs and tuple variants\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0015`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/059-const-generic-infer": {
+      "hash": "f6cafb489e36c271",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/060-generic-const-expr": {
+      "hash": "de89e121184292f1",
+      "compiles": false,
+      "status": 1,
+      "error": "error: generic parameters may not be used in const operations",
+      "output": "error: generic parameters may not be used in const operations\n --> main.rs:1:55\n  |\n1 | fn push<const N: usize>(a: [i32; N], x: i32) -> [i32; N + 1] {\n  |                                                       ^ cannot perform const operation using `N`\n  |\n  = help: const parameters may only be used as standalone arguments here, i.e. `N`\n\nerror: aborting due to 1 previous error\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/061-push-while-iter": {
+      "hash": "e0a5d50270bc4f7d",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable",
+      "output": "error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable\n --> main.rs:5:13\n  |\n3 |       for x in &v {\n  |       -        --\n  |       |        |\n  |       |        immutable borrow occurs here\n  |  _____|        immutable borrow later used here\n  | |\n4 | |         if *x > 1 {\n5 | |             v.push(*x);\n  | |             ^^^^^^^^^^ mutable borrow occurs here\n6 | |         }\n7 | |     }\n  | |_____- this for loop borrows `v` immutably, preventing mutation within its body\n  |\n  = help: consider using an index-based loop instead, or collecting modifications into a separate collection\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0502`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/062-swap-two-indices": {
+      "hash": "81ae428d8b42dff3",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0499]: cannot borrow `v` as mutable more than once at a time",
+      "output": "error[E0499]: cannot borrow `v` as mutable more than once at a time\n --> main.rs:3:36\n  |\n3 |     std::mem::swap(&mut v[0], &mut v[1]);\n  |     --------------      -          ^ second mutable borrow occurs here\n  |     |                   |\n  |     |                   first mutable borrow occurs here\n  |     first borrow later used by call\n  |\n  = help: use `.split_at_mut(position)` to obtain two mutable non-overlapping sub-slices\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0499`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/063-split-at-mut": {
+      "hash": "88f400e367a034a5",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/064-struct-update-partial": {
+      "hash": "be1e749d26756436",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/065-match-ergonomics-mut": {
+      "hash": "69eb6e8ac72c7a79",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/066-ambiguous-method": {
+      "hash": "757fe54e7dbcfa4f",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0034]: multiple applicable items in scope",
+      "output": "error[E0034]: multiple applicable items in scope\n  --> main.rs:18:22\n   |\n18 |     println!(\"{}\", P.hello());\n   |                      ^^^^^ multiple `hello` found\n   |\nnote: candidate #1 is defined in an impl of the trait `English` for the type `P`\n  --> main.rs:2:5\n   |\n 2 |     fn hello(&self) -> &str {\n   |     ^^^^^^^^^^^^^^^^^^^^^^^\nnote: candidate #2 is defined in an impl of the trait `Japanese` for the type `P`\n  --> main.rs:8:5\n   |\n 8 |     fn hello(&self) -> &str {\n   |     ^^^^^^^^^^^^^^^^^^^^^^^\nhelp: disambiguate the method for candidate #1\n   |\n18 -     println!(\"{}\", P.hello());\n18 +     println!(\"{}\", English::hello(&P));\n   |\nhelp: disambiguate the method for candidate #2\n   |\n18 -     println!(\"{}\", P.hello());\n18 +     println!(\"{}\", Japanese::hello(&P));\n   |\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0034`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/067-ambiguous-int-method": {
+      "hash": "a2614b2d9fc986b5",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0689]: can't call method `pow` on ambiguous numeric type `{integer}`",
+      "output": "error[E0689]: can't call method `pow` on ambiguous numeric type `{integer}`\n --> main.rs:2:15\n  |\n2 |     let x = 2.pow(10);\n  |               ^^^\n  |\nhelp: you must specify a concrete type for this numeric value, like `i32`\n  |\n2 |     let x = 2_i32.pow(10);\n  |              ++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0689`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/068-negative-unsigned": {
+      "hash": "2e4405b11da84874",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0600]: cannot apply unary operator `-` to type `u32`",
+      "output": "error[E0600]: cannot apply unary operator `-` to type `u32`\n --> main.rs:2:18\n  |\n2 |     let x: u32 = -1;\n  |                  ^^ cannot apply unary operator `-`\n  |\n  = note: unsigned values cannot be negated\nhelp: you may have meant the maximum value of `u32`\n  |\n2 -     let x: u32 = -1;\n2 +     let x: u32 = u32::MAX;\n  |\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0600`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/069-char-plus-int": {
+      "hash": "94c8bd6a0cc25a5c",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0369]: cannot add `{integer}` to `char`",
+      "output": "error[E0369]: cannot add `{integer}` to `char`\n --> main.rs:2:17\n  |\n2 |     let c = 'a' + 1;\n  |             --- ^ - {integer}\n  |             |\n  |             char\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0369`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "advanced/070-u8-as-char": {
+      "hash": "da8acac3b6587b38",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "basic/001-move-string": {
       "hash": "91fa8f9655309efe",
       "compiles": false,
-      "error": "error[E0382]: borrow of moved value: `s`"
+      "status": 1,
+      "error": "error[E0382]: borrow of moved value: `s`",
+      "output": "error[E0382]: borrow of moved value: `s`\n --> main.rs:4:16\n  |\n2 |     let s = String::from(\"hello\");\n  |         - move occurs because `s` has type `String`, which does not implement the `Copy` trait\n3 |     let t = s;\n  |             - value moved here\n4 |     println!(\"{s} {t}\");\n  |                ^ value borrowed here after move\n  |\nhelp: consider cloning the value if the performance cost is acceptable\n  |\n3 |     let t = s.clone();\n  |              ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0382`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "basic/002-copy-i32": {
       "hash": "0a3c57c5ba4e85a1",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "basic/003-shared-then-mut": {
       "hash": "babf803c315ebb0a",
       "compiles": false,
-      "error": "error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable"
+      "status": 1,
+      "error": "error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable",
+      "output": "error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable\n --> main.rs:4:5\n  |\n3 |     let first = &v[0];\n  |                  - immutable borrow occurs here\n4 |     v.push(4);\n  |     ^^^^^^^^^ mutable borrow occurs here\n5 |     println!(\"{first}\");\n  |                ----- immutable borrow later used here\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0502`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "basic/004-nll": {
       "hash": "8dab3f5b35b0ca53",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "basic/005-immutable-reassign": {
       "hash": "bbcc38e6f2e028ca",
       "compiles": false,
-      "error": "error[E0384]: cannot assign twice to immutable variable `count`"
+      "status": 1,
+      "error": "error[E0384]: cannot assign twice to immutable variable `count`",
+      "output": "error[E0384]: cannot assign twice to immutable variable `count`\n --> main.rs:3:5\n  |\n2 |     let count = 0;\n  |         ----- first assignment to `count`\n3 |     count = count + 1;\n  |     ^^^^^^^^^^^^^^^^^ cannot assign twice to immutable variable\n  |\nhelp: consider making this binding mutable\n  |\n2 |     let mut count = 0;\n  |         +++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0384`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "basic/006-shadowing": {
       "hash": "4ae3f5eb8a33eaee",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "basic/007-for-moves-vec": {
       "hash": "5aadb8b03d72b950",
       "compiles": false,
-      "error": "error[E0382]: borrow of moved value: `v`"
+      "status": 1,
+      "error": "error[E0382]: borrow of moved value: `v`",
+      "output": "error[E0382]: borrow of moved value: `v`\n --> main.rs:6:20\n  |\n2 |     let v = vec![String::from(\"a\"), String::from(\"b\")];\n  |         - move occurs because `v` has type `Vec<String>`, which does not implement the `Copy` trait\n3 |     for x in v {\n  |              - `v` moved due to this implicit call to `.into_iter()`\n...\n6 |     println!(\"{}\", v.len());\n  |                    ^ value borrowed here after move\n  |\nnote: the `for` loop is desugared into a call to `std::iter::IntoIterator::into_iter`, which takes ownership of the receiver `self`, which moves `v`\n --> /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/iter/traits/collect.rs:312:17\nhelp: consider iterating over a slice of the `Vec<String>`'s content to avoid moving into the `for` loop\n  |\n3 |     for x in &v {\n  |              +\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0382`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "basic/008-struct-shorthand": {
       "hash": "a96d0258068a6cd2",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "warning: fields `x`, `y`, and `z` are never read\n --> main.rs:3:5\n  |\n2 | struct Point {\n  |        ----- fields in this struct\n3 |     x: i32,\n  |     ^\n4 |     y: i32,\n  |     ^\n5 |     z: i32,\n  |     ^\n  |\n  = note: `Point` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis\n  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: 1 warning emitted\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "basic/009-format-capture": {
       "hash": "822779fcff56ce7b",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "basic/010-non-exhaustive": {
       "hash": "bb9a152a20b2b688",
       "compiles": false,
-      "error": "error[E0004]: non-exhaustive patterns: `Direction::West` not covered"
+      "status": 1,
+      "error": "error[E0004]: non-exhaustive patterns: `Direction::West` not covered",
+      "output": "error[E0004]: non-exhaustive patterns: `Direction::West` not covered\n  --> main.rs:10:22\n   |\n10 |     let name = match d {\n   |                      ^ pattern `Direction::West` not covered\n   |\nnote: `Direction` defined here\n  --> main.rs:1:6\n   |\n 1 | enum Direction {\n   |      ^^^^^^^^^\n...\n 5 |     West,\n   |     ---- not covered\n   = note: the matched value is of type `Direction`\nhelp: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern or an explicit pattern as shown\n   |\n13 ~         Direction::South => \"S\",\n14 ~         Direction::West => todo!(),\n   |\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0004`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "basic/011-u8-256": {
       "hash": "3c9bfc67bec208a4",
       "compiles": false,
-      "error": "error[overflowing_literals]: literal out of range for `u8`"
+      "status": 1,
+      "error": "error: literal out of range for `u8`",
+      "output": "error: literal out of range for `u8`\n --> main.rs:2:17\n  |\n2 |     let x: u8 = 256;\n  |                 ^^^\n  |\n  = note: the literal `256` does not fit into the type `u8` whose range is `0..=255`\n  = note: `#[deny(overflowing_literals)]` on by default\n\nerror: aborting due to 1 previous error\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "basic/012-main-result": {
       "hash": "0aba508c7b7046b7",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "basic/013-dangling": {
       "hash": "a532e2dc146ebe8a",
       "compiles": false,
-      "error": "error[E0597]: `x` does not live long enough"
+      "status": 1,
+      "error": "error[E0597]: `x` does not live long enough",
+      "output": "error[E0597]: `x` does not live long enough\n --> main.rs:5:13\n  |\n4 |         let x = 5;\n  |             - binding `x` declared here\n5 |         r = &x;\n  |             ^^ borrowed value does not live long enough\n6 |     }\n  |     - `x` dropped here while still borrowed\n7 |     println!(\"{r}\");\n  |                - borrow later used here\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0597`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "basic/014-deferred-init": {
       "hash": "52f0d4e24694cede",
       "compiles": true,
-      "error": null
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     },
     "basic/015-vec-new-infer": {
       "hash": "7a5ef2ac823eecc1",
       "compiles": false,
-      "error": "error[E0282]: type annotations needed for `Vec<_>`"
+      "status": 1,
+      "error": "error[E0282]: type annotations needed for `Vec<_>`",
+      "output": "error[E0282]: type annotations needed for `Vec<_>`\n --> main.rs:2:9\n  |\n2 |     let v = Vec::new();\n  |         ^   ---------- type must be known at this point\n  |\nhelp: consider giving `v` an explicit type, where the type for type parameter `T` is specified\n  |\n2 |     let v: Vec<T> = Vec::new();\n  |          ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0282`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "basic/016-mut-borrow-immutable": {
+      "hash": "2bdf69c4dfca96b6",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0596]: cannot borrow `s` as mutable, as it is not declared as mutable",
+      "output": "error[E0596]: cannot borrow `s` as mutable, as it is not declared as mutable\n --> main.rs:3:13\n  |\n3 |     let r = &mut s;\n  |             ^^^^^^ cannot borrow as mutable\n  |\nhelp: consider changing this to be mutable\n  |\n2 |     let mut s = String::from(\"hello\");\n  |         +++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0596`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "basic/017-if-else-types": {
+      "hash": "e2b89b38ca545293",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0308]: `if` and `else` have incompatible types",
+      "output": "error[E0308]: `if` and `else` have incompatible types\n --> main.rs:3:34\n  |\n3 |     let x = if flag { 1 } else { \"one\" };\n  |                       -          ^^^^^ expected integer, found `&str`\n  |                       |\n  |                       expected because of this\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "basic/018-trailing-semicolon": {
+      "hash": "e2bc7e40c455d961",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0308]: mismatched types",
+      "output": "error[E0308]: mismatched types\n --> main.rs:1:14\n  |\n1 | fn five() -> i32 {\n  |    ----      ^^^ expected `i32`, found `()`\n  |    |\n  |    implicitly returns `()` as its body has no tail or `return` expression\n2 |     5;\n  |      - help: remove this semicolon to return this value\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "basic/019-mixed-int-types": {
+      "hash": "44e01553f3a34437",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0308]: mismatched types",
+      "output": "error[E0308]: mismatched types\n --> main.rs:4:24\n  |\n4 |     println!(\"{}\", a + b);\n  |                        ^ expected `i32`, found `i64`\n\nerror[E0277]: cannot add `i64` to `i32`\n --> main.rs:4:22\n  |\n4 |     println!(\"{}\", a + b);\n  |                      ^ no implementation for `i32 + i64`\n  |\n  = help: the trait `Add<i64>` is not implemented for `i32`\nhelp: the following other types implement trait `Add<Rhs>`\n --> /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/ops/arith.rs:98:8\n  |\n  = note: `i32` implements `Add`\n ::: /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/ops/arith.rs:113:0\n  |\n  = note: in this macro invocation\n --> /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/internal_macros.rs:22:8\n  |\n  = note: `&i32` implements `Add<i32>`\n ::: /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/internal_macros.rs:33:8\n  |\n  = note: `i32` implements `Add<&i32>`\n ::: /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/internal_macros.rs:44:8\n  |\n  = note: `&i32` implements `Add`\n  = note: this error originates in the macro `add_impl` (in Nightly builds, run with -Z macro-backtrace for more info)\n\nerror: aborting due to 2 previous errors\n\nSome errors have detailed explanations: E0277, E0308.\nFor more information about an error, try `rustc --explain E0277`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "basic/020-option-add": {
+      "hash": "52c8b002be9b4773",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0369]: cannot add `{integer}` to `Option<&{integer}>`",
+      "output": "error[E0369]: cannot add `{integer}` to `Option<&{integer}>`\n --> main.rs:4:26\n  |\n4 |     println!(\"{}\", first + 1);\n  |                    ----- ^ - {integer}\n  |                    |\n  |                    Option<&{integer}>\n  |\nnote: `Option<&{integer}>` does not implement `Add<{integer}>`\n --> /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/option.rs:598:0\n  |\n  = note: `Option<&{integer}>` is defined in another crate\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0369`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "basic/021-string-add": {
+      "hash": "8a4f5ea885951f85",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "basic/022-string-index": {
+      "hash": "4143ef33dfa98704",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0277]: the type `str` cannot be indexed by `{integer}`",
+      "output": "error[E0277]: the type `str` cannot be indexed by `{integer}`\n --> main.rs:3:15\n  |\n3 |     let c = s[0];\n  |               ^ string indices are ranges of `usize`\n  |\n  = help: the trait `SliceIndex<str>` is not implemented for `{integer}`\n  = note: you can use `.chars().nth()` or `.bytes().nth()`\n          for more information, see chapter 8 in The Book: <https://doc.rust-lang.org/book/ch08-02-strings.html#indexing-into-strings>\nhelp: `usize` implements trait `SliceIndex<T>`\n --> /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/slice/index.rs:179:0\n  |\n  = note: `SliceIndex<[T]>`\n --> /rustc/58cf8f9c35b355199727627d07ae34a4e2846d67/library/core/src/bstr/traits.rs:197:0\n  |\n  = note: `SliceIndex<ByteStr>`\n  = note: required for `String` to implement `Index<{integer}>`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "basic/023-tuple-index": {
+      "hash": "6ab84f7f93dcd5bc",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "basic/024-const-type": {
+      "hash": "56e83d4b53f7d370",
+      "compiles": false,
+      "status": 1,
+      "error": "error: missing type for `const` item",
+      "output": "error: missing type for `const` item\n --> main.rs:1:10\n  |\n1 | const MAX = 10;\n  |          ^ help: provide a type for the constant: `: i32`\n\nerror: aborting due to 1 previous error\n\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "basic/025-loop-break-value": {
+      "hash": "f354e581a20f78cd",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "basic/026-guard-exhaustive": {
+      "hash": "dd30a1b919271360",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0004]: non-exhaustive patterns: `i32::MIN..=i32::MAX` not covered",
+      "output": "error[E0004]: non-exhaustive patterns: `i32::MIN..=i32::MAX` not covered\n --> main.rs:3:19\n  |\n3 |     let s = match n {\n  |                   ^ pattern `i32::MIN..=i32::MAX` not covered\n  |\n  = note: the matched value is of type `i32`\n  = note: match arms with guards don't count towards exhaustivity\nhelp: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern or an explicit pattern as shown\n  |\n5 ~         x if x < 0 => \"negative\",\n6 ~         i32::MIN..=i32::MAX => todo!(),\n  |\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0004`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "basic/027-iter-mut": {
+      "hash": "71f5f5cb925f1510",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "basic/028-struct-field-immutable": {
+      "hash": "23ecc768cb5aba2a",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0594]: cannot assign to `p.x`, as `p` is not declared as mutable",
+      "output": "error[E0594]: cannot assign to `p.x`, as `p` is not declared as mutable\n --> main.rs:8:5\n  |\n8 |     p.x = 5;\n  |     ^^^^^^^ cannot assign\n  |\nhelp: consider changing this to be mutable\n  |\n7 |     let mut p = Point { x: 1, y: 2 };\n  |         +++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0594`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "basic/029-elision-one": {
+      "hash": "0815ac2dbf813a0f",
+      "compiles": true,
+      "status": 0,
+      "error": null,
+      "output": "",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
+    },
+    "basic/030-elision-two": {
+      "hash": "89ab12496cce5b22",
+      "compiles": false,
+      "status": 1,
+      "error": "error[E0106]: missing lifetime specifier",
+      "output": "error[E0106]: missing lifetime specifier\n --> main.rs:1:33\n  |\n1 | fn longest(a: &str, b: &str) -> &str {\n  |               ----     ----     ^ expected named lifetime parameter\n  |\n  = help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `a` or `b`\nhelp: consider introducing a named lifetime parameter\n  |\n1 | fn longest<'a>(a: &'a str, b: &'a str) -> &'a str {\n  |           ++++     ++          ++          ++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0106`.\n",
+      "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+      "args": [
+        "+1.99.1",
+        "--edition",
+        "2024",
+        "main.rs"
+      ]
     }
   }
 }

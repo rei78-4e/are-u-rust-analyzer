@@ -1,5 +1,7 @@
 "use strict";
 
+import { editorHtml, escapeHtml, highlight, renderText, terminalHtml } from "./render.js";
+
 // 1 回のテストで出す問題数
 const PICK = { basic: 3, advanced: 7 };
 const TOTAL = PICK.basic + PICK.advanced;
@@ -27,83 +29,9 @@ function shuffle(arr) {
   return a;
 }
 
-function escapeHtml(s) {
-  return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-}
-
-// 解説文: `code` をインラインコードに、改行を <br> に
-function renderText(s) {
-  return escapeHtml(s)
-    .replace(/`([^`]+)`/g, "<code>$1</code>")
-    .replace(/\n/g, "<br>");
-}
-
 function show(screen) {
   for (const id of ["screen-start", "screen-quiz", "screen-result"]) $(id).hidden = id !== screen;
   window.scrollTo({ top: 0 });
-}
-
-// ---------- tiny Rust highlighter ----------
-
-const KEYWORDS = new Set(
-  ("as async await break const continue crate dyn else enum extern false fn for gen if impl in let loop " +
-   "match mod move mut pub ref return self Self static struct super trait true type union unsafe use where while")
-    .split(" "),
-);
-const PRIMITIVES = new Set(
-  "i8 i16 i32 i64 i128 isize u8 u16 u32 u64 u128 usize f32 f64 bool char str".split(" "),
-);
-
-const TOKEN = new RegExp(
-  [
-    String.raw`(?<cmt>\/\/[^\n]*)`,
-    String.raw`(?<attr>#!?\[[^\]\n]*\])`,
-    String.raw`(?<raw>[bc]?r(?<h>#*)"[\s\S]*?"\k<h>)`,
-    String.raw`(?<str>[bc]?"(?:\\[\s\S]|[^"\\])*")`,
-    String.raw`(?<chr>b?'(?:\\.|[^'\\])')`,
-    String.raw`(?<lt>'[A-Za-z_]\w*)`,
-    String.raw`(?<mac>[A-Za-z_]\w*!(?!=))`,
-    String.raw`(?<num>\b\d[\d_]*(?:\.\d[\d_]*)?(?:[eE][+-]?\d+)?(?:_?[iuf](?:8|16|32|64|128|size))?\b)`,
-    String.raw`(?<ident>\b(?:r#)?[A-Za-z_]\w*\b)`,
-  ].join("|"),
-  "g",
-);
-
-function highlight(code) {
-  let out = "";
-  let last = 0;
-  for (const m of code.matchAll(TOKEN)) {
-    out += escapeHtml(code.slice(last, m.index));
-    last = m.index + m[0].length;
-    const g = m.groups;
-    const text = escapeHtml(m[0]);
-    let cls = null;
-    if (g.cmt) cls = "cmt";
-    else if (g.attr) cls = "attr";
-    else if (g.raw || g.str || g.chr) cls = "str";
-    else if (g.lt) cls = "lt";
-    else if (g.mac) cls = "mac";
-    else if (g.num) cls = "num";
-    else if (g.ident) {
-      const id = g.ident;
-      if (KEYWORDS.has(id)) cls = "kw";
-      else if (PRIMITIVES.has(id) || /^[A-Z]/.test(id)) cls = "ty";
-      else if (code[last] === "(" || code.startsWith("::<", last)) cls = "fn";
-    }
-    out += cls ? `<span class="hl-${cls}">${text}</span>` : text;
-  }
-  out += escapeHtml(code.slice(last));
-  // 行番号用に 1 行ずつ包む (span が行をまたぐことはない: 複数行のトークンは raw string のみで、問題では使わない)
-  return out
-    .replace(/\n$/, "")
-    .split("\n")
-    .map((l) => `<span class="line">${l}</span>`)
-    .join("");
-}
-
-function editorHtml(code) {
-  return `<div class="editor"><div class="editor-bar"><span></span><span></span><span></span><em>main.rs</em></div>` +
-    `<pre class="code"><code>${highlight(code)}</code></pre></div>`;
 }
 
 // ---------- quiz flow ----------
@@ -131,6 +59,8 @@ function renderQuestion() {
     b.classList.remove("picked");
   }
   $("feedback").hidden = true;
+  $("terminal").hidden = true;
+  $("unverified").hidden = true;
 }
 
 function answer(choice) {
@@ -148,23 +78,19 @@ function answer(choice) {
   verdict.className = `verdict ${correct ? "correct" : "wrong"}`;
   verdict.textContent = correct
     ? "正解！"
-    : `不正解… 正解は「${q.answer === "ok" ? "コンパイル通る" : "コンパイルエラー"}」`;
+    : `不正解… 正解は「${q.answer === "ok" ? "OK" : "エラー"}」`;
 
-  $("terminal").innerHTML = terminalHtml(q);
+  // 未検証の問題は rustc の実行結果を出さない (answer から status を捏造しない)
+  const showTerminal = q.verified === true && Array.isArray(q.args);
+  $("terminal").hidden = !showTerminal;
+  $("unverified").hidden = showTerminal;
+  if (showTerminal) $("terminal").innerHTML = terminalHtml(q);
   $("explain").innerHTML = renderText(q.explain);
   $("next").textContent = state.index + 1 === TOTAL ? "結果を見る" : "次へ";
   $("feedback").hidden = false;
   $("progress-bar").style.width = `${((state.index + 1) / TOTAL) * 100}%`;
   $("next").focus({ preventScroll: true });
   $("feedback").scrollIntoView({ behavior: "smooth", block: "nearest" });
-}
-
-function terminalHtml(q) {
-  const cmd = `<span class="prompt">$ rustc +${escapeHtml(state.toolchain)} --edition ${q.edition} main.rs</span>\n`;
-  if (q.answer === "ok") return `${cmd}<span class="t-ok">✓</span> コンパイル成功`;
-  const msg = q.rustc ?? "error: (コンパイルエラー)";
-  const m = msg.match(/^(error(?:\[[^\]]+\])?)(:[\s\S]*)$/);
-  return cmd + (m ? `<span class="t-err">${escapeHtml(m[1])}</span>${escapeHtml(m[2])}` : escapeHtml(msg));
 }
 
 function next() {
@@ -210,14 +136,18 @@ function showResult() {
 
   $("review").innerHTML = state.answers
     .map(({ q, choice, correct }, i) => {
-      const label = (a) => (a === "ok" ? "通る" : "エラー");
+      const label = (a) => (a === "ok" ? "OK" : "エラー");
       return `<li class="${correct ? "correct" : ""}"><details>
         <summary><span class="mark">${correct ? "○" : "×"}</span> Q${i + 1}
           <span class="chip">${q.level === "basic" ? "基礎" : "応用"}</span>
           <span class="chip">${escapeHtml(q.topic)}</span>
           あなた: ${label(choice)} / 正解: ${label(q.answer)}</summary>
         <div class="body">${editorHtml(q.code)}
-          <pre class="terminal">${terminalHtml(q)}</pre>
+          ${
+            q.verified === true && Array.isArray(q.args)
+              ? `<pre class="terminal">${terminalHtml(q)}</pre>`
+              : `<p class="unverified">この問題は未検証です。rustc の実行結果は表示できません。</p>`
+          }
           <p class="explain">${renderText(q.explain)}</p></div>
       </details></li>`;
     })
@@ -243,6 +173,12 @@ document.addEventListener("keydown", (e) => {
 for (const b of document.querySelectorAll(".choice")) b.addEventListener("click", () => answer(b.dataset.answer));
 $("next").addEventListener("click", next);
 $("start").addEventListener("click", startQuiz);
+$("home").addEventListener("click", (e) => {
+  e.preventDefault();
+  const inQuiz = !$("screen-quiz").hidden && state.answers.length < TOTAL;
+  if (inQuiz && state.answers.length > 0 && !confirm("途中の回答は破棄されます。ホームに戻りますか？")) return;
+  show("screen-start");
+});
 $("retry").addEventListener("click", startQuiz);
 
 const challenge = Number(new URLSearchParams(location.search).get("s"));

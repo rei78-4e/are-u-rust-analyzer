@@ -7,6 +7,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "verify": "node scripts/verify.mjs",
+    "test": "node scripts/test-render.mjs",
     "dev": "wrangler dev",
     "deploy": "wrangler deploy"
   },
