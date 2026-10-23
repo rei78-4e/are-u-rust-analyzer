@@ -45,29 +45,41 @@ function startQuiz() {
   renderQuestion();
 }
 
+function updateProgress() {
+  const answered = state.answers.filter(Boolean).length;
+  $("progress-bar").style.width = `${(answered / TOTAL) * 100}%`;
+}
+
 function renderQuestion() {
   const q = state.quiz[state.index];
-  $("progress-bar").style.width = `${(state.index / TOTAL) * 100}%`;
   $("q-num").textContent = `Q${state.index + 1}/${TOTAL}`;
   $("q-level").textContent = q.level === "basic" ? "基礎" : "応用";
   $("q-level").className = `chip level-${q.level}`;
   $("q-topic").textContent = q.topic;
   $("q-edition").textContent = `edition ${q.edition}`;
   $("q-code").innerHTML = highlight(q.code);
-  for (const b of document.querySelectorAll(".choice")) {
-    b.disabled = false;
-    b.classList.remove("picked");
+  $("back").hidden = state.index === 0;
+
+  const entry = state.answers[state.index];
+  if (entry) {
+    // 回答済みの問題に戻ってきたときは、前回の回答と解説をそのまま表示する
+    showAnswered(q, entry.choice);
+  } else {
+    for (const b of document.querySelectorAll(".choice")) {
+      b.disabled = false;
+      b.classList.remove("picked");
+    }
+    $("feedback").hidden = true;
+    $("terminal").hidden = true;
+    $("unverified").hidden = true;
   }
-  $("feedback").hidden = true;
-  $("terminal").hidden = true;
-  $("unverified").hidden = true;
+
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-function answer(choice) {
-  if (!$("feedback").hidden) return;
-  const q = state.quiz[state.index];
+function showAnswered(q, choice) {
   const correct = choice === q.answer;
-  state.answers.push({ q, choice, correct });
 
   for (const b of document.querySelectorAll(".choice")) {
     b.disabled = true;
@@ -88,16 +100,35 @@ function answer(choice) {
   $("explain").innerHTML = renderText(q.explain);
   $("next").textContent = state.index + 1 === TOTAL ? "結果を見る" : "次へ";
   $("feedback").hidden = false;
-  $("progress-bar").style.width = `${((state.index + 1) / TOTAL) * 100}%`;
+}
+
+function answer(choice) {
+  if (!$("feedback").hidden) return;
+  if (state.answers[state.index]) return;
+  const q = state.quiz[state.index];
+  const correct = choice === q.answer;
+  state.answers[state.index] = { q, choice, correct };
+
+  showAnswered(q, choice);
+  updateProgress();
   $("next").focus({ preventScroll: true });
   $("feedback").scrollIntoView({ behavior: "smooth", block: "nearest" });
 }
 
 function next() {
   if ($("feedback").hidden) return;
+  if (state.index + 1 === TOTAL) {
+    showResult();
+    return;
+  }
   state.index++;
-  if (state.index < TOTAL) renderQuestion();
-  else showResult();
+  renderQuestion();
+}
+
+function back() {
+  if (state.index === 0) return;
+  state.index--;
+  renderQuestion();
 }
 
 // ---------- result ----------
@@ -161,10 +192,13 @@ function showResult() {
 document.addEventListener("keydown", (e) => {
   if (e.metaKey || e.ctrlKey || e.altKey || $("screen-quiz").hidden) return;
   const k = e.key.toLowerCase();
-  if ($("feedback").hidden) {
+  if (k === "arrowleft") {
+    e.preventDefault();
+    back();
+  } else if ($("feedback").hidden) {
     if (k === "o") answer("ok");
     else if (k === "x") answer("error");
-  } else if (k === "enter" && document.activeElement !== $("next")) {
+  } else if (k === "enter" && document.activeElement !== $("next") && document.activeElement !== $("back")) {
     e.preventDefault();
     next();
   }
@@ -172,11 +206,13 @@ document.addEventListener("keydown", (e) => {
 
 for (const b of document.querySelectorAll(".choice")) b.addEventListener("click", () => answer(b.dataset.answer));
 $("next").addEventListener("click", next);
+$("back").addEventListener("click", back);
 $("start").addEventListener("click", startQuiz);
 $("home").addEventListener("click", (e) => {
   e.preventDefault();
-  const inQuiz = !$("screen-quiz").hidden && state.answers.length < TOTAL;
-  if (inQuiz && state.answers.length > 0 && !confirm("途中の回答は破棄されます。ホームに戻りますか？")) return;
+  const answered = state.answers.filter(Boolean).length;
+  const inQuiz = !$("screen-quiz").hidden && answered < TOTAL;
+  if (inQuiz && answered > 0 && !confirm("途中の回答は破棄されます。ホームに戻りますか？")) return;
   show("screen-start");
 });
 $("retry").addEventListener("click", startQuiz);

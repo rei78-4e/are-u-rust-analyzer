@@ -260,6 +260,8 @@ pre.code .line::before {
 .choice.picked.ok { border-color: var(--ok); }
 .choice.picked.error { border-color: var(--err); }
 
+.back { margin-top: 12px; padding: 8px 16px; font-size: .9rem; }
+
 .feedback {
   margin-top: 18px;
   padding: 18px;

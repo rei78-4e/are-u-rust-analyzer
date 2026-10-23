@@ -27,7 +27,7 @@
       <p class="lead">このコードはコンパイルできるか、考えてみてください。全 10 問。</p>
       <p id="challenge" class="challenge" hidden></p>
       <button id="start" class="btn primary" disabled>読み込み中…</button>
-      <p class="hint">キーボード: <kbd>X</kbd> エラー / <kbd>O</kbd> OK / <kbd>Enter</kbd> 次へ</p>
+      <p class="hint">キーボード: <kbd>X</kbd> エラー / <kbd>O</kbd> OK / <kbd>Enter</kbd> 次へ / <kbd>←</kbd> 前へ</p>
     </section>
 
     <!-- 出題画面 -->
@@ -46,6 +46,7 @@
         <button class="btn choice error" data-answer="error"><b>X</b> エラー</button>
         <button class="btn choice ok" data-answer="ok"><b>O</b> OK</button>
       </div>
+      <button id="back" class="btn back" hidden>← 前へ</button>
       <div id="feedback" class="feedback" hidden>
         <p id="verdict" class="verdict"></p>
         <pre id="terminal" class="terminal" hidden></pre>
