@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Are you rust-analyzer?</title>
+  <meta name="description" content="そのコード、コンパイル通る？ Rust のコードを見て rustc の判定を当てる 10 問クイズ。">
+  <meta property="og:title" content="Are you rust-analyzer?">
+  <meta property="og:description" content="そのコード、コンパイル通る？ Rust のコードを見て rustc の判定を当てる 10 問クイズ。">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#1b1b1f">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦀</text></svg>">
+  <link rel="stylesheet" href="/style.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main id="app">
+    <!-- スタート画面 -->
+    <section id="screen-start" class="screen">
+      <p class="eyebrow">rustc <span class="toolchain">1.99.1</span> 準拠</p>
+      <h1>Are you<br><span class="accent">rust-analyzer</span>?</h1>
+      <p class="lead">
+        表示される Rust のコードが<strong>コンパイルできるか</strong>を当ててください。<br>
+        全 10 問 (基礎 3 問 + 応用 7 問)。「え!?」なコードも混ざっています。
+      </p>
+      <p id="challenge" class="challenge" hidden></p>
+      <button id="start" class="btn primary" disabled>読み込み中…</button>
+      <p class="hint">キーボード: <kbd>O</kbd> 通る / <kbd>X</kbd> エラー / <kbd>Enter</kbd> 次へ</p>
+    </section>
+
+    <!-- 出題画面 -->
+    <section id="screen-quiz" class="screen" hidden>
+      <div class="progress"><div id="progress-bar"></div></div>
+      <div class="q-meta">
+        <span id="q-num" class="q-num"></span>
+        <span id="q-level" class="chip"></span>
+        <span id="q-topic" class="chip"></span>
+        <span id="q-edition" class="chip edition"></span>
+      </div>
+      <div class="editor">
+        <div class="editor-bar"><span></span><span></span><span></span><em>main.rs</em></div>
+        <pre class="code"><code id="q-code"></code></pre>
+      </div>
+      <div id="choices" class="choices">
+        <button class="btn choice ok" data-answer="ok"><b>O</b> コンパイル通る</button>
+        <button class="btn choice error" data-answer="error"><b>X</b> コンパイルエラー</button>
+      </div>
+      <div id="feedback" class="feedback" hidden>
+        <p id="verdict" class="verdict"></p>
+        <pre id="terminal" class="terminal"></pre>
+        <p id="explain" class="explain"></p>
+        <button id="next" class="btn primary">次へ</button>
+      </div>
+    </section>
+
+    <!-- 結果画面 -->
+    <section id="screen-result" class="screen" hidden>
+      <p class="eyebrow">結果</p>
+      <p class="score"><span id="score"></span><small>/10</small></p>
+      <h2 id="rank-title"></h2>
+      <p id="rank-comment" class="lead"></p>
+      <div class="share">
+        <a id="share-x" class="btn share-btn x" target="_blank" rel="noopener">X でシェア</a>
+        <a id="share-bsky" class="btn share-btn bsky" target="_blank" rel="noopener">Bluesky</a>
+        <a id="share-misskey" class="btn share-btn misskey" target="_blank" rel="noopener">Misskey</a>
+        <a id="share-threads" class="btn share-btn threads" target="_blank" rel="noopener">Threads</a>
+        <button id="share-copy" class="btn share-btn">コピー</button>
+        <button id="share-native" class="btn share-btn" hidden>共有…</button>
+      </div>
+      <button id="retry" class="btn primary">もう一度挑戦</button>
+      <h3>答え合わせ</h3>
+      <ol id="review" class="review"></ol>
+    </section>
+  </main>
+  <footer>
+    判定はすべて rustc <span class="toolchain">1.99.1</span> で事前に検証済み ·
+    <a href="https://github.com/rei78-4e/are-u-rust-analyzer" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "are-u-rust-analyzer",
+  "compatibility_date": "2026-10-01",
+  // 静的アセットのみの Worker。判定はすべてフロントエンドで行う。
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "single-page-application"
+  },
+  // wrangler dev / deploy の前に questions.json を生成する
+  "build": {
+    "command": "npm run build"
+  }
+  // 独自ドメインで公開する場合 (例):
+  // "routes": [{ "pattern": "rust.rei78.cc", "custom_domain": true }]
+}

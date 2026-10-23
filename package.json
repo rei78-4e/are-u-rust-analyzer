@@ -1,0 +1,16 @@
+{
+  "name": "are-u-rust-analyzer",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Rust のコードがコンパイルできるかを当てるクイズ",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "verify": "node scripts/verify.mjs",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "4.148.0"
+  }
+}

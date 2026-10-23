@@ -1,0 +1,255 @@
+{
+  "toolchain": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+  "results": {
+    "advanced/001-underscore-no-move": {
+      "hash": "1492fbe491338ddb",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/002-two-phase-borrow": {
+      "hash": "7663757434bf77ee",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/003-push-pop": {
+      "hash": "3eef0559fd510692",
+      "compiles": false,
+      "error": "error[E0499]: cannot borrow `v` as mutable more than once at a time"
+    },
+    "advanced/004-implicit-reborrow": {
+      "hash": "d48b1e2b4f356a39",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/005-generic-no-reborrow": {
+      "hash": "f68f7b094e9a6f3f",
+      "compiles": false,
+      "error": "error[E0382]: use of moved value: `r`"
+    },
+    "advanced/006-static-promotion": {
+      "hash": "8025670c822b50f5",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/007-destructuring-assign": {
+      "hash": "e75c1280e6f2df29",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/008-array-len-infer": {
+      "hash": "489aca803644b7a9",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/009-ambiguous-float": {
+      "hash": "d4d8bbfdf4c741bc",
+      "compiles": false,
+      "error": "error[E0689]: can't call method `powi` on ambiguous numeric type `{float}`"
+    },
+    "advanced/010-range-inclusive-len": {
+      "hash": "b04f729c89081d81",
+      "compiles": false,
+      "error": "error[E0277]: the trait bound `std::ops::RangeInclusive<i32>: ExactSizeIterator` is not satisfied"
+    },
+    "advanced/011-u32-as-char": {
+      "hash": "44ca9793b83e7345",
+      "compiles": false,
+      "error": "error[E0604]: only `u8` can be cast as `char`, not `u32`"
+    },
+    "advanced/012-char-range": {
+      "hash": "55a2b06dc78b1ffb",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/013-infallible-pattern": {
+      "hash": "6c35a816f2be9fc2",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/014-ferris-ident": {
+      "hash": "ec9f5be55b77899f",
+      "compiles": false,
+      "error": "error: Ferris cannot be used as an identifier"
+    },
+    "advanced/015-let-chains-2024": {
+      "hash": "45a4f9c6590a6bc9",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/016-let-chains-2021": {
+      "hash": "ac0ba45f781bec06",
+      "compiles": false,
+      "error": "error: let chains are only allowed in Rust 2024 or later"
+    },
+    "advanced/017-gen-keyword": {
+      "hash": "bda86dcc3b80a6cd",
+      "compiles": false,
+      "error": "error: expected identifier, found reserved keyword `gen`"
+    },
+    "advanced/018-set-var-unsafe": {
+      "hash": "4a6ab194d5688cfa",
+      "compiles": false,
+      "error": "error[E0133]: call to unsafe function `set_var` is unsafe and requires unsafe block"
+    },
+    "advanced/019-ref-in-default-binding": {
+      "hash": "4417c17be7d96b89",
+      "compiles": false,
+      "error": "error: cannot explicitly borrow within an implicitly-borrowing pattern"
+    },
+    "advanced/020-labeled-block": {
+      "hash": "c7ee2deb62ab8aef",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/021-return-return": {
+      "hash": "24a16f2e322b2be8",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/022-struct-literal-in-if": {
+      "hash": "ce1df4b3360a8e05",
+      "compiles": false,
+      "error": "error: struct literals are not allowed here"
+    },
+    "advanced/023-format-field-access": {
+      "hash": "45077122c5a48b83",
+      "compiles": false,
+      "error": "error: invalid format string: field access isn't supported"
+    },
+    "advanced/024-macro-order": {
+      "hash": "e986819934b91094",
+      "compiles": false,
+      "error": "error: cannot find macro `greet` in this scope"
+    },
+    "advanced/025-macro-hygiene": {
+      "hash": "dc4183037c61c770",
+      "compiles": false,
+      "error": "error[E0425]: cannot find value `x` in this scope"
+    },
+    "advanced/026-inline-const-repeat": {
+      "hash": "d250ba6eb87d8c75",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/027-unconditional-panic": {
+      "hash": "11fe93d645173920",
+      "compiles": false,
+      "error": "error[unconditional_panic]: this operation will panic at runtime"
+    },
+    "advanced/028-index-split-borrow": {
+      "hash": "bbd16c831f66b7d9",
+      "compiles": false,
+      "error": "error[E0499]: cannot borrow `v` as mutable more than once at a time"
+    },
+    "advanced/029-disjoint-capture": {
+      "hash": "10e89d1a5d0d7fd7",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/030-closure-ref-return": {
+      "hash": "633a29439693fa6e",
+      "compiles": false,
+      "error": "error: lifetime may not live long enough"
+    },
+    "advanced/031-blanket-local-type": {
+      "hash": "5f4a4eee8217a470",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/032-trivial-where": {
+      "hash": "c57939d1fef906b3",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/033-thread-scope": {
+      "hash": "ee3f99005fc9e4ea",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/034-irrefutable-let-else": {
+      "hash": "7725cc02a80e2cb7",
+      "compiles": true,
+      "error": null
+    },
+    "advanced/035-async-closure": {
+      "hash": "d813da9514bd2e11",
+      "compiles": true,
+      "error": null
+    },
+    "basic/001-move-string": {
+      "hash": "91fa8f9655309efe",
+      "compiles": false,
+      "error": "error[E0382]: borrow of moved value: `s`"
+    },
+    "basic/002-copy-i32": {
+      "hash": "0a3c57c5ba4e85a1",
+      "compiles": true,
+      "error": null
+    },
+    "basic/003-shared-then-mut": {
+      "hash": "babf803c315ebb0a",
+      "compiles": false,
+      "error": "error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable"
+    },
+    "basic/004-nll": {
+      "hash": "8dab3f5b35b0ca53",
+      "compiles": true,
+      "error": null
+    },
+    "basic/005-immutable-reassign": {
+      "hash": "bbcc38e6f2e028ca",
+      "compiles": false,
+      "error": "error[E0384]: cannot assign twice to immutable variable `count`"
+    },
+    "basic/006-shadowing": {
+      "hash": "4ae3f5eb8a33eaee",
+      "compiles": true,
+      "error": null
+    },
+    "basic/007-for-moves-vec": {
+      "hash": "5aadb8b03d72b950",
+      "compiles": false,
+      "error": "error[E0382]: borrow of moved value: `v`"
+    },
+    "basic/008-struct-shorthand": {
+      "hash": "a96d0258068a6cd2",
+      "compiles": true,
+      "error": null
+    },
+    "basic/009-format-capture": {
+      "hash": "822779fcff56ce7b",
+      "compiles": true,
+      "error": null
+    },
+    "basic/010-non-exhaustive": {
+      "hash": "bb9a152a20b2b688",
+      "compiles": false,
+      "error": "error[E0004]: non-exhaustive patterns: `Direction::West` not covered"
+    },
+    "basic/011-u8-256": {
+      "hash": "3c9bfc67bec208a4",
+      "compiles": false,
+      "error": "error[overflowing_literals]: literal out of range for `u8`"
+    },
+    "basic/012-main-result": {
+      "hash": "0aba508c7b7046b7",
+      "compiles": true,
+      "error": null
+    },
+    "basic/013-dangling": {
+      "hash": "a532e2dc146ebe8a",
+      "compiles": false,
+      "error": "error[E0597]: `x` does not live long enough"
+    },
+    "basic/014-deferred-init": {
+      "hash": "52f0d4e24694cede",
+      "compiles": true,
+      "error": null
+    },
+    "basic/015-vec-new-infer": {
+      "hash": "7a5ef2ac823eecc1",
+      "compiles": false,
+      "error": "error[E0282]: type annotations needed for `Vec<_>`"
+    }
+  }
+}
