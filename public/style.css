@@ -359,7 +359,6 @@ pre.code .line::before {
 .share-btn.x { background: #000; border-color: #000; color: #fff; }
 .share-btn.bsky { background: #1185fe; border-color: #1185fe; color: #fff; }
 .share-btn.misskey { background: #86b300; border-color: #86b300; color: #fff; }
-.share-btn.threads { background: #fff; border-color: var(--border); color: #000; }
 
 h3 { margin-top: 40px; }
 

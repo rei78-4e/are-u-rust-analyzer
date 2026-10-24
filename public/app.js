@@ -150,7 +150,6 @@ function showResult() {
   $("share-x").href = `https://x.com/intent/post?text=${enc(text)}&url=${enc(url)}`;
   $("share-bsky").href = `https://bsky.app/intent/compose?text=${enc(`${text}\n${url}`)}`;
   $("share-misskey").href = `https://misskey-hub.net/share/?text=${enc(`${text}\n${url}`)}&visibility=public&localOnly=0`;
-  $("share-threads").href = `https://www.threads.net/intent/post?text=${enc(`${text}\n${url}`)}`;
   $("share-copy").onclick = async () => {
     try {
       await navigator.clipboard.writeText(`${text}\n${url}`);
