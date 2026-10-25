@@ -1,19 +1,10 @@
 "use strict";
 
+import { rankFor, TOTAL } from "./ranks.js";
 import { editorHtml, escapeHtml, highlight, renderText, terminalHtml } from "./render.js";
 
-// 1 回のテストで出す問題数
+// 1 回のテストで出す問題数 (合計は ranks.js の TOTAL)
 const PICK = { basic: 3, advanced: 7 };
-const TOTAL = PICK.basic + PICK.advanced;
-
-const RANKS = [
-  { min: 10, title: "あなたは rust-analyzer です", comment: "赤い波線を引く側の存在。もう IDE はいりません。" },
-  { min: 8, title: "あなたは rustc です", comment: "ほぼコンパイラ。エラーメッセージまで脳内で出力できそう。" },
-  { min: 6, title: "あなたは clippy です", comment: "だいたい分かっている。ついでに余計な指摘もしたくなる。" },
-  { min: 4, title: "あなたは cargo check 常用者です", comment: "保存するたびに IDE の赤線を確認するタイプ。" },
-  { min: 2, title: "あなたは借用チェッカーと喧嘩中です", comment: "とりあえず .clone() を付ければ通ると信じている。" },
-  { min: 0, title: "あなたは C++ コンパイラです", comment: "なんでも通しそう。実行時に会いましょう。" },
-];
 
 const $ = (id) => document.getElementById(id);
 const state = { all: [], quiz: [], index: 0, answers: [], toolchain: "1.99.1" };
@@ -139,7 +130,7 @@ function shareUrl(score) {
 
 function showResult() {
   const score = state.answers.filter((a) => a.correct).length;
-  const rank = RANKS.find((r) => score >= r.min);
+  const rank = rankFor(score);
   $("score").textContent = score;
   $("rank-title").textContent = rank.title;
   $("rank-comment").textContent = rank.comment;

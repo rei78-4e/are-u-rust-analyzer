@@ -2,10 +2,13 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "are-u-rust-analyzer",
   "compatibility_date": "2026-10-01",
-  // 静的アセットのみの Worker。判定はすべてフロントエンドで行う。
+  // 判定はすべてフロントエンドで行う。Worker はトップページの OG メタタグを書き換えるだけ。
+  "main": "src/worker.js",
   "assets": {
     "directory": "./public",
-    "not_found_handling": "single-page-application"
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/"]
   },
   // wrangler dev / deploy の前に questions.json を生成する
   "build": {

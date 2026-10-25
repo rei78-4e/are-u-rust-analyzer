@@ -12,7 +12,12 @@ npm install
 npm run dev      # questions.json を生成して wrangler dev を起動
 npm run deploy   # Cloudflare Workers にデプロイ
 npm test         # 描画関数の round-trip テスト (rustc 不要)
+npm run og       # シェア用 OG 画像 (public/og/*.png) を再生成
 ```
+
+シェアリンク (`/?s=<点数>`) の OG メタタグは `src/worker.js` がスコアに合わせて書き換え、
+画像は `public/og/<点数>.png` を使います。画像はコミット済みで、称号 (`public/ranks.js`) や
+デザインを変えたときだけ `npm run og` で作り直します (Noto Sans JP と Monaspace Radon のシステムフォントが必要)。
 
 独自ドメインで公開する場合は、`wrangler.jsonc` の `routes` のコメントを外してください。
 

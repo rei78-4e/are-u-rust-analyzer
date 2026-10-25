@@ -8,10 +8,12 @@
     "build": "node scripts/build.mjs",
     "verify": "node scripts/verify.mjs",
     "test": "node scripts/test-render.mjs",
+    "og": "node scripts/og.mjs",
     "dev": "wrangler dev",
     "deploy": "wrangler deploy"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "2.6.2",
     "wrangler": "4.148.0"
   }
 }
