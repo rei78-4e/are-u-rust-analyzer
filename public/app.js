@@ -20,6 +20,32 @@ function shuffle(arr) {
   return a;
 }
 
+// 出題履歴 { [id]: 最後に出題した時刻 } を localStorage に保存し、直近に出た問題を後回しにする
+const SEEN_KEY = "seen";
+
+function loadSeen() {
+  try {
+    const seen = JSON.parse(localStorage.getItem(SEEN_KEY));
+    return seen && typeof seen === "object" ? seen : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveSeen(quiz) {
+  const seen = loadSeen();
+  const now = Date.now();
+  for (const q of quiz) seen[q.id] = now;
+  // 削除・改名された問題の履歴は捨てる
+  const ids = new Set(state.all.map((q) => q.id));
+  for (const id of Object.keys(seen)) if (!ids.has(id)) delete seen[id];
+  try {
+    localStorage.setItem(SEEN_KEY, JSON.stringify(seen));
+  } catch {
+    // ストレージが使えない環境では履歴なしで動く
+  }
+}
+
 function show(screen) {
   for (const id of ["screen-start", "screen-quiz", "screen-result"]) $(id).hidden = id !== screen;
   window.scrollTo({ top: 0 });
@@ -28,8 +54,18 @@ function show(screen) {
 // ---------- quiz flow ----------
 
 function startQuiz() {
-  const by = (level) => shuffle(state.all.filter((q) => q.level === level)).slice(0, PICK[level]);
+  // 未出題の問題を優先し、全問出し切った後は出題が古い半分からランダムに選ぶ。
+  // 古い順に厳密に選ぶと 2 周目以降が 1 周目と同じ組み合わせ・同じ順番になってしまうため。
+  const seen = loadSeen();
+  const by = (level) => {
+    const pool = shuffle(state.all.filter((q) => q.level === level));
+    const fresh = pool.filter((q) => !(q.id in seen));
+    const old = pool.filter((q) => q.id in seen).sort((a, b) => seen[a.id] - seen[b.id]);
+    const half = Math.ceil(old.length / 2);
+    return [...fresh, ...shuffle(old.slice(0, half)), ...old.slice(half)].slice(0, PICK[level]);
+  };
   state.quiz = [...by("basic"), ...by("advanced")];
+  saveSeen(state.quiz);
   state.index = 0;
   state.answers = [];
   show("screen-quiz");
